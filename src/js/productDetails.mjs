@@ -1,9 +1,5 @@
 import { findProductById } from "./productData.mjs";
-import { setLocalStorage } from "./utils.mjs";
-
-
-// Since the intructions does not show how to develop these code 
-// we've copied the code of the instructor
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 let product = {};
 
@@ -16,13 +12,20 @@ export default async function productDetails(productId) {
   document.getElementById("addToCart").addEventListener("click", addToCart);
 }
 function addToCart() {
-  setLocalStorage("so-cart", product);
+  let cartContents = getLocalStorage("so-cart");
+  //check to see if there was anything there
+  if (!cartContents) {
+    cartContents = [];
+  }
+  // then add the current product to the list
+  cartContents.push(product);
+  setLocalStorage("so-cart", cartContents);
 }
 function renderProductDetails() {
   document.querySelector("#productName").innerText = product.Brand.Name;
   document.querySelector("#productNameWithoutBrand").innerText =
     product.NameWithoutBrand;
-  document.querySelector("#productImage").src = product.Image;
+  document.querySelector("#productImage").src = product.Images.PrimaryLarge;
   document.querySelector("#productImage").alt = product.Name;
   document.querySelector("#productFinalPrice").innerText = product.FinalPrice;
   document.querySelector("#productColorName").innerText =

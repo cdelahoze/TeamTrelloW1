@@ -43,15 +43,13 @@ export function renderListWithTemplate(
 }
 
 export async function renderWithTemplate(
-  templateFn, 
-  parentElement, 
-  data, 
-  callback, 
-  position="afterbegin", 
-  clear=true
-  ) {
-  
-  // get template using function...no need to loop this time.
+  templateFn,
+  parentElement,
+  data,
+  callback,
+  position = "afterbegin",
+  clear = true
+) {
   if (clear) {
     parentElement.innerHTML = "";
   }
